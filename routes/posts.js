@@ -9,6 +9,8 @@ router.post('/postId', postsController.postGetById);
 
 router.get('/published', postsController.postPublishedGet);
 
+router.get('/unpublished', postsController.postUnpublishedGet)
+
 router.post('/createPost', verifyToken, postsController.postCreate);
 
 router.delete('/deletePost', verifyToken, postsController.postDelete);

@@ -53,7 +53,6 @@ export const createOrUpdatePost = (
         }
       )
       .then((res) => {
-        console.log(res.data);
         if (res.data.errors) {
           setErrors(res.data.errors);
         } else {

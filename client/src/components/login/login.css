@@ -1,0 +1,44 @@
+.login-section {
+  margin: auto;
+  border: 1px solid rgb(99, 99, 99);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 30px;
+  margin-top: 50px;
+  padding: 15px;
+  text-align: center;
+}
+
+.login-section h2 {
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginsection h3 {
+  font-size: 25px;
+}
+
+.login-section button {
+  font-weight: 600;
+  color: white;
+  background-color: black;
+  border: 0;
+  padding: 5px;
+  font-size: 18px;
+}
+
+.label-input {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.label-input input {
+  margin-top: 3px;
+  padding: 3px;
+}

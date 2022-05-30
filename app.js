@@ -22,7 +22,6 @@ const commentsRouter = require('./routes/comments');
 
 const app = express();
 
-// view engine setup
 app.use(cors());
 app.use(helmet());
 app.use(compression());
@@ -32,7 +31,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
-//app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
 app.use('/comments', commentsRouter);

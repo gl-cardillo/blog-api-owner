@@ -1,0 +1,77 @@
+.create-post-container {
+  margin: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.create-post-container h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.create-post-container input, .create-post-container textarea {
+  border-radius: 5px;
+  padding: 3px;
+  margin-bottom: 10px;
+
+}
+
+.radio-form {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-input {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-input label {
+  display: block;
+  background: black;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 10px;
+  border: 2px solid ;
+  margin: 10px;
+  cursor: pointer;
+  width: 100px
+}
+
+input[type="radio"] {
+ display: none;
+ position: absolute;
+ width:50px;
+}
+
+input[type='radio']:checked + label {
+ background: white;
+ color: black;
+}
+
+.create-post-container button {
+  background-color: black;
+  color: white;
+  border: 0;
+  font-weight: 600;
+  padding: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  .create-post-container {
+    padding: 0 100px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-post-container {
+    padding: 0 300px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .create-post-container {
+    padding: 0 550px;
+  }
+}

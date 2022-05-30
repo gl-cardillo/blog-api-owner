@@ -25,6 +25,18 @@ exports.postPublishedGet = async (req, res, next) => {
   }
 };
 
+exports.postUnpublishedGet = async (req, res, next) => {
+  try {
+    const posts = await Post.find({ published: false }).sort({ date: -1 });
+    if (!posts) {
+      return res.status(404).json({ msg: 'posts not found' });
+    }
+    return res.status(200).json(posts);
+  } catch (err) {
+    return json(err);
+  }
+};
+
 exports.postGetById = async (req, res, next) => {
   try {
     const post = await Post.findById(req.body.id);

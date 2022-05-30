@@ -1,0 +1,89 @@
+.post-container {
+  margin: 50px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 10px;
+}
+
+.post h3 {
+  font-size: 30px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-post {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.post button, .comment-container button {
+  background-color: transparent;
+  border: 0;
+  text-decoration: underline;
+}
+
+.time p {
+  font-size: 12px;
+  text-align: right;
+}
+
+.comments-container h3 {
+  font-size: 20px;
+}
+
+.comment-container {
+  border: 1px solid rgb(172, 172, 172);
+  padding: 5px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.comment-text {
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.comment-details {
+  text-align: right;
+  font-size: 14px;
+}
+
+.comment-form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form-container button {
+  background-color: black;
+  color: white;
+  border: 0;
+  font-weight: 600;
+  padding: 5px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .post-container {
+    padding: 0 100px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .post-container {
+    padding: 0 300px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .post-container {
+    padding: 0 450px;
+  }
+}
+

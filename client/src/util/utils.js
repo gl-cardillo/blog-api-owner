@@ -25,67 +25,6 @@ export const getPostAndComments = (id, setPost, setComments) => {
   }
 };
 
-export const createOrUpdatePost = (
-  id,
-  title,
-  text,
-  published,
-  setErrors,
-  navigate
-) => {
-  //if update is not null update instead of create
-  if (id) {
-    axios
-      .put(
-        '/posts/updatePost',
-        {
-          title,
-          text,
-          published,
-          id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem('user')).token
-            }`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.errors) {
-          setErrors(res.data.errors);
-        } else {
-          navigate(`/post/${id}`);
-        }
-      });
-  } else {
-    // if id is undefined then create a new post
-    axios
-      .post(
-        '/posts/createPost',
-        {
-          title,
-          text,
-          published,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem('user')).token
-            }`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.errors) {
-          setErrors(res.data.errors);
-        } else {
-          navigate(`/home`);
-        }
-      });
-  }
-};
 
 export const deleteComment = (id, setRender, render) => {
   axios
@@ -107,7 +46,7 @@ export const deleteComment = (id, setRender, render) => {
     });
 };
 
-export const deletePost = (id, navigate) => {
+export const deletePost = (id, img, navigate) => {
   axios
     .delete('/posts/deletePost', {
       headers: {
@@ -118,6 +57,7 @@ export const deletePost = (id, navigate) => {
 
       data: {
         id,
+        img
       },
     })
     .then(() => {
@@ -135,6 +75,7 @@ export const deletePost = (id, navigate) => {
       },
       data: {
         id,
+        img
       },
     })
     .then(() => {

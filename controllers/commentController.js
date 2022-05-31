@@ -44,7 +44,7 @@ exports.commentsCreate = [
 ];
 
 exports.commentDelete = async (req, res, next) => {
-  console.log(req.body.id)
+  console.log(req.body.id);
   try {
     await Comment.findByIdAndDelete(req.body.id);
     return res

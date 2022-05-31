@@ -10,14 +10,13 @@ const PostSchema = new Schema(
     date: { type: Date, required: true },
     date_update: { type: Date },
     published: { type: Boolean, required: true },
+    img: { type: String },
   },
   { toJSON: { virtuals: true } }
 );
 
 PostSchema.virtual('date_formatted').get(function () {
-  return DateTime.fromJSDate(this.date).toLocaleString(
-    DateTime.DATETIME_SHORT
-  );
+  return DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATETIME_SHORT);
 });
 
 PostSchema.virtual('date_formatted_home').get(function () {

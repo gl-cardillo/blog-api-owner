@@ -1,5 +1,34 @@
 const Post = require('../models/post');
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
 const { body, validationResult } = require('express-validator');
+
+//multer config
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: '1000000' },
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png|gif/;
+    const mimeType = fileTypes.test(file.mimetype);
+    const extname = fileTypes.test(path.extname(file.originalname));
+
+    if (mimeType && extname) {
+      return cb(null, true);
+    }
+    req.fileValidationError = 'Forbidden extension';
+    return cb(null, false, req.fileValidationError);
+  },
+}).single('image');
 
 exports.postGet = async (req, res, next) => {
   try {
@@ -50,6 +79,7 @@ exports.postGetById = async (req, res, next) => {
 };
 
 exports.postCreate = [
+  upload,
   body('title')
     .trim()
     .isLength(3)
@@ -61,17 +91,25 @@ exports.postCreate = [
     .withMessage('Text must be at least 5 character')
     .escape(),
   async (req, res, next) => {
+    if (req.fileValidationError) {
+      return res.status(400).json({ msg: 'please apload .jpg, .jpeg or png' });
+    }
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.json({ errors: errors.array() });
     }
+
     const post = await new Post({
       title: req.body.title,
       text: req.body.text,
       published: req.body.published,
       date: Date.now(),
       date_update: null,
+      img: req.file?.path,
     });
+
+    if (!req.file) post.img = '';
     post.save((err) => {
       if (err) {
         return json(err);
@@ -82,6 +120,7 @@ exports.postCreate = [
 ];
 
 exports.postUpdate = [
+  upload,
   body('title')
     .trim()
     .isLength(3)
@@ -93,6 +132,9 @@ exports.postUpdate = [
     .withMessage('Text must be at least 5 character')
     .escape(),
   async (req, res, next) => {
+    if (req.fileValidationError) {
+      return res.status(400).json({ msg: 'please apload .jpg, .jpeg or png' });
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.json({ errors: errors.array() });
@@ -101,9 +143,11 @@ exports.postUpdate = [
       title: req.body.title,
       text: req.body.text,
       published: req.body.published,
-      date_update: Date.now(),
+      img: req.file?.path,
       _id: req.body.id,
     });
+
+    if (!req.file) post.img = '';
     Post.findByIdAndUpdate(req.body.id, post, {}, function (err) {
       if (err) {
         return json(err);
@@ -140,6 +184,10 @@ exports.postDelete = async (req, res, next) => {
     if (err) {
       return json(err);
     }
+    fs.unlink(req.body.img, (err) => {
+      if (err) console.log(err);
+      console.log(req.body.img, 'was deleted');
+    });
     return res.status(200).json({ msg: `post with id ${req.body.id} deleted` });
   });
 };

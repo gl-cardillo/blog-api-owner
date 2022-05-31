@@ -1,6 +1,7 @@
 import './post.css';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { FaGithub } from 'react-icons/fa';
 import {
   getPostAndComments,
   deletePost,
@@ -49,11 +50,12 @@ export function Post() {
                   Publish
                 </button>
               )}
-              <button onClick={() => deletePost(id, navigate)}>
+              <button onClick={() => deletePost(id, post.img, navigate)}>
                 Delete post
               </button>
               <button onClick={() => editPost(id, navigate)}>Edit post</button>
             </div>{' '}
+            <img src={post.img !== '' ? post.img : ''} alt="" />
             <p>{post.text}</p>
             <div className="time">
               <p>Created at: {post.date_formatted}</p>
@@ -118,6 +120,17 @@ export function Post() {
           )}
         </div>
       </div>
+      <footer>
+        <a
+          href="https://github.com/gl-cardillo"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <p>
+            <FaGithub style={{ fontSize: '25px' }} /> Made by Luca Cardillo
+          </p>
+        </a>
+      </footer>
     </div>
   );
 }

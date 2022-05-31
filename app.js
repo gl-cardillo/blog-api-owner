@@ -29,6 +29,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use('/uploads', express.static('./uploads'));
+app.use('/post/uploads', express.static('./uploads'));
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.use('/posts', postsRouter);

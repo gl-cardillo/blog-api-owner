@@ -42,10 +42,11 @@ export function Home({ setIsAuth }) {
               return (
                 <div key={index} className="post-container-home">
                   <Link to={`/post/${post._id}`}>
+                    <img src={post.img !== '' ? post.img : 'uploads/white.png'}  alt="" />
                     <h4>{post.title}</h4>
                   </Link>
                   {post.published ? <p>Published</p> : <p>Unpublished</p>}
-                  <p>Created at: {post.date_formatted_home}</p>
+                  <p>Created: {post.date_formatted_home}</p>
                 </div>
               );
             })}

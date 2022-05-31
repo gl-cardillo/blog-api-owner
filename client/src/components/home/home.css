@@ -12,7 +12,6 @@
 .posts-sections-title {
   width: 50%;
   padding: 0 5px;
-
 }
 
 .posts-sections {
@@ -29,6 +28,12 @@
   flex-direction: column;
   gap: 10px;
   margin: 5px;
+  width: 150px;
+}
+
+.post-container-home img {
+  width: 140px;
+  height: 140px;
 }
 
 .post-container-home h4 {

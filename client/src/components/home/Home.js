@@ -45,7 +45,7 @@ export function Home({ setIsAuth }) {
                     <h4>{post.title}</h4>
                   </Link>
                   {post.published ? <p>Published</p> : <p>Unpublished</p>}
-                  <p>Created at: {post.date_formatted}</p>
+                  <p>Created at: {post.date_formatted_home}</p>
                 </div>
               );
             })}

@@ -15,7 +15,13 @@ const PostSchema = new Schema(
 );
 
 PostSchema.virtual('date_formatted').get(function () {
-  return DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATETIME_SHORT);
+  return DateTime.fromJSDate(this.date).toLocaleString(
+    DateTime.DATETIME_SHORT
+  );
+});
+
+PostSchema.virtual('date_formatted_home').get(function () {
+  return DateTime.fromJSDate(this.date).toRelativeCalendar();
 });
 
 PostSchema.virtual('date_update_formatted').get(function () {
